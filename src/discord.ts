@@ -46,13 +46,15 @@ async function checkScoresAndNotify() {
       if (oldScore) {
         const old = lastScores.get(matchId).fullScore.split(',');
         const curr = match.fullScore.split(',');
-        const scores = [old, curr];
-        for (const each of scores) {
-          for (let e of each) {
-            e = e.split('-');
-          }
+        const scores = [old, curr].map((scoreSet) =>
+          scoreSet.map((score: string) => score.split('-').map(Number))
+        );
+        const sumOld = sumGames(scores[0]);
+        const sumCurr = sumGames(scores[1]);
+        if (sumCurr <= sumOld) {
+          console.log('Current games total is not greater; returning early.');
+          return;
         }
-        console.log(scores);
       }
       lastScores.set(matchId, currentMatchData);
       if (!oldScore) return;
@@ -111,4 +113,8 @@ function calculateGameMsg(oldScore: TennisMatch, match: TennisMatch) {
   } else if (oldScore.currentSet.away !== match.currentSet.away) {
     return `**${match.away}** won the game`;
   }
+}
+
+function sumGames(scores: number[][]) {
+  return scores.reduce((sum, [home, away]) => sum + home + away, 0);
 }
