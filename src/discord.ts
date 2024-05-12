@@ -4,9 +4,9 @@ import {
   GatewayIntentBits,
   TextChannel,
   EmbedBuilder,
-} from "discord.js";
-import dotenv from "dotenv";
-import fetchTennisScores, { TennisMatch } from "./tennis";
+} from 'discord.js';
+import dotenv from 'dotenv';
+import fetchTennisScores, { TennisMatch } from './tennis';
 dotenv.config();
 
 let lastScores = new Map();
@@ -24,11 +24,11 @@ client.login(process.env.DISCORD_KEY);
 async function checkScoresAndNotify() {
   const matches = await fetchTennisScores();
   const channel = (await client.channels.fetch(
-    "1232716870478462990"
+    '1239018474437873674'
   )) as TextChannel;
 
   if (!matches) {
-    return console.log("Error fetching tennis scores or No Matches");
+    return console.log('Error fetching tennis scores or No Matches');
   }
 
   matches.forEach((match: TennisMatch) => {
@@ -44,12 +44,12 @@ async function checkScoresAndNotify() {
     };
     if (!oldScore || oldScore.fullScore !== match.fullScore) {
       if (oldScore) {
-        const old = lastScores.get(matchId).fullScore.split(",");
-        const curr = match.fullScore.split(",");
+        const old = lastScores.get(matchId).fullScore.split(',');
+        const curr = match.fullScore.split(',');
         const scores = [old, curr];
         for (const each of scores) {
           for (let e of each) {
-            e = e.split("-");
+            e = e.split('-');
           }
         }
         console.log(scores);
@@ -67,11 +67,11 @@ async function checkScoresAndNotify() {
           // "[View Full Match](http://example.com)"
         )
         .setFields({
-          name: " ",
-          value: "**Powered By [TennisXData](https://www.tennisxdata.app)**",
+          name: ' ',
+          value: '**Powered By [TennisXData](https://www.tennisxdata.app)**',
           inline: true,
         })
-        .setColor("#0099ff");
+        .setColor('#0099ff');
       // .setFooter({
       //   text: "Powered By TennisXData",
       // });
@@ -89,7 +89,7 @@ function calculateGameMsg(oldScore: TennisMatch, match: TennisMatch) {
       oldScore.currentSet.home == 0 &&
       oldScore.currentSet.away == 0)
   ) {
-    return "";
+    return '';
   }
   if (match.matchWinner == 1) {
     return `**${match.home}** won the match`;
