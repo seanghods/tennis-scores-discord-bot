@@ -62,7 +62,7 @@ async function checkScoresAndNotify() {
       const embed = new EmbedBuilder()
         // .setTitle(`${match.home} vs ${match.away}`)
         .setDescription(
-          `${match.home} vs ${match.away}\n` +
+          `**${match.home}** vs **${match.away}**\n` +
             `${gameMsg}\n` +
             `${match.currentSetMsg}\n` +
             `The Set Score is **${match.setScore.home}** - **${match.setScore.away}**\n` +
