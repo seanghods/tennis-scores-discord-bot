@@ -58,7 +58,7 @@ async function checkScoresAndNotify() {
       if (!oldScore) return;
       const gameMsg = calculateGameMsg(oldScore, match);
       const embed = new EmbedBuilder()
-        .setTitle(`${match.home} vs ${match.away}`)
+        // .setTitle(`${match.home} vs ${match.away}`)
         .setDescription(
           `${gameMsg}\n` +
             `${match.currentSetMsg}\n` +
