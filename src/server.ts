@@ -10,7 +10,7 @@ dotenv.config();
 import './discord';
 
 const app = express();
-const port = 3001;
+const port = process.env.PORT || 3001;
 
 if (typeof process.env.SESSION_KEY === 'undefined') {
   throw new Error('SESSION_KEY is not defined in the environment variables');
